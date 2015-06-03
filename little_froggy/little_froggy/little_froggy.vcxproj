@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\headers\cloud.h" />
+    <ClInclude Include="src\headers\elixir.h" />
+    <ClInclude Include="src\headers\bee.h" />
+    <ClInclude Include="src\headers\coin.h" />
+    <ClInclude Include="src\headers\floor.h" />
+    <ClInclude Include="src\headers\arrow.h" />
+    <ClInclude Include="src\headers\consts.h" />
+    <ClInclude Include="src\headers\fly.h" />
+    <ClInclude Include="src\headers\game.h" />
+    <ClInclude Include="src\headers\heart.h" />
+    <ClInclude Include="src\headers\menu.h" />
+    <ClInclude Include="src\headers\platform.h" />
+    <ClInclude Include="src\headers\player.h" />
+    <ClInclude Include="src\headers\sun.h" />
+    <ClInclude Include="src\headers\tongue.h" />
+    <ClInclude Include="src\headers\strawberry.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="CyrilicOld.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\floor.png" />
+    <Image Include="images\frog2.png" />
+    <Image Include="images\froga.png" />
+    <Image Include="images\frog_new.png" />
+    <Image Include="images\frog_new2.png" />
+    <Image Include="images\sheqel.png" />
+    <Image Include="images\sheqel2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\cloud.cpp" />
+    <ClCompile Include="src\elixir.cpp" />
+    <ClCompile Include="src\bee.cpp" />
+    <ClCompile Include="src\fly.cpp" />
+    <ClCompile Include="src\heart.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\arrow.cpp" />
+    <ClCompile Include="src\coin.cpp" />
+    <ClCompile Include="src\floor.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\menu.cpp" />
+    <ClCompile Include="src\platform.cpp" />
+    <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\sun.cpp" />
+    <ClCompile Include="src\tongue.cpp" />
+    <ClCompile Include="src\strawberry.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D502DB34-6BC9-475C-B255-4BF838A0B8B3}</ProjectGuid>
+    <RootNamespace>little_froggy</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>E:\SFML-2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;SFML_DYNAMIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\SFML-2.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib</AdditionalDependencies>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
