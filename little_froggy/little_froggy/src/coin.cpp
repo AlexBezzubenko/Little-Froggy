@@ -12,8 +12,11 @@ Coin::Coin(Texture &image){
 
 void Coin::update(){
 	if (rect.left + rect.width < border){
-		rect.top = screen_size.y;
+		rect.left += screen_size.x + rand() % 100;
+		int position_y = rand() % 250 + 100;
+		rect.top = position_y;
 	}
+
 	sprite.setPosition(rect.left - offset_x, rect.top - offset_y);
 }
 

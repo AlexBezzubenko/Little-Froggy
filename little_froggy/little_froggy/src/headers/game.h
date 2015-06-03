@@ -46,8 +46,10 @@ public:
 	RenderWindow window;
 
 private:
-	bool collision;
+	bool game_is_running;
 	int lifes_count;
+	int game_mode;
+	int game_speed = 400;
 	const int delta_angle_original = -0.08;
 	float delta_angle = -0.08;
 	float left_angle_border = 89;		// first value
@@ -64,14 +66,21 @@ private:
 	Heart hearts[hearts_count];
 	Strawberry *bonus_strawberry;
 	Elixir *bonus_elixir;
+
+	Coin coin[coin_count];
 	Cloud clouds[clouds_count];
 	Sun sun;
 	Floor floor_[floor_count];
 
 	Clock clock;
-	float common_time;
+	
 	RectangleShape rectangle;
 	Texture *game_texture;
+	Texture *background;
+	Texture *menu_texture;
+
+	FloatRect rect;
+	Sprite s_map;
 
 	Text text;
 	Text score_text;

@@ -3,14 +3,20 @@
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
+
+const int menu_string_count = 3;
+
 class Menu{
 public:
-	RectangleShape rect;
-	FloatRect rect2;
-	Sprite sprite;
-	Menu(Texture &image);
 	Menu();
-	void show();
+	Menu(Texture &image, Font &font);
+	int check_selected(Vector2f point);
+	void check_target(Vector2f point);
+	void show(RenderWindow &window);
 	void update();
+private:
+	FloatRect rect;
+	Sprite sprite;
+	Text menu_string[menu_string_count];
 };
 #endif

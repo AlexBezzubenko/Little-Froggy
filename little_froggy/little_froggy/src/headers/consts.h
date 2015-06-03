@@ -15,11 +15,7 @@ const int coin_count = 4;
 const int clouds_count = 2;
 const int hearts_count = 3;
 
-
 extern Platform plats[plats_count];
-extern Coin coin[coin_count];
-
-
 
 const struct screen_size{
 	int x = 1366;

@@ -40,12 +40,6 @@ void Platform::update(float time){
 				crashed = false;
 				timer = 0;
 				frog_on = false;
-				/*for (int j = 0; j < 4; j++){
-					if (coin[j].rect.top >= screen_size.y){
-						coin[j].rect.left = plats[i..rect.left + plats[i].rect.width / 2 - coin[j].rect.width / 2;
-						coin[j].rect.top = plats[i].rect.top - coin[j].rect.height - 50;
-					}
-				}*/
 			}
 		}
 		rect.top = screen_size.y / 2;

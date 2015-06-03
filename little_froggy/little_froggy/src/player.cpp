@@ -45,9 +45,7 @@ void Player::update(float time) {
 
 	Collision(0);
 
-	if (!onground
-		//&& abs(acceleration_y) < 0.6
-		){
+	if (!onground){
 		acceleration_y += 0.0005*time;
 	} //gravity
 	
