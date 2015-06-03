@@ -56,6 +56,7 @@ private:
 	float delta_angle = -0.08;
 	float left_angle_border = 89;		// first value
 	float right_angle_border = 271;
+	float current_angle;
 	
 	Menu menu;
 	Music music;

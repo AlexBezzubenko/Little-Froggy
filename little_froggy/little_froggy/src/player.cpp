@@ -45,7 +45,9 @@ void Player::kill(){
 	alive = false;
 	set_acceleration_x(0);
 	set_acceleration_y(0);
-	sprite.setTextureRect(IntRect(220, 0, 100, 125));
+	if (!on_tongue){
+		sprite.setTextureRect(IntRect(220, 0, 100, 125));
+	}
 }
 void Player::update(float time) {
 	
@@ -106,9 +108,7 @@ void Player::update(float time) {
 }
 
 void Player::Collision(int dir) {
-	
 	for (int i = 0; i < plats_count; i++) {
-
 		if (rect.intersects(plats[i].temp)) {
 			if (acceleration_x > 0 && dir == 0) {
 				rect.left = plats[i].temp.left - rect.width;

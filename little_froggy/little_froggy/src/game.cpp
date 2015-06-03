@@ -14,8 +14,8 @@ Game::Game()
 	game_is_running = false;
 	game_over = false;
 
-	music.openFromFile("res/music/main_sound.oggv");
-	game_over_music.openFromFile("res/music/star_wars.ogvg");
+	music.openFromFile("res/music/main_sound.ogg");
+	game_over_music.openFromFile("res/music/star_wars.ogg");
 		 
 	game_texture = new Texture();
 	game_texture->loadFromFile("res/images/frog_new.png");
@@ -171,7 +171,7 @@ void Game::object_update(float time) // =border
 {
 	if (frog.rect.left > border + screen_size.x / 2){
 		border = frog.rect.left - screen_size.x / 2;
-		std::cout << border << std::endl;
+		std::cout << "border"<< border << std::endl;
 	}
 
 	arrow.rect.left = frog.rect.left + frog.rect.width / 2;
@@ -241,19 +241,21 @@ void Game::object_update(float time) // =border
 			hearts[lifes_count - 1].set_empty();
 			lifes_count--;
 		}
-		if (frog.rect.left < bee.rect.left){
-			frog.set_acceleration_x(-0.2);
-		}
-		if (frog.rect.left > bee.rect.left){
-			frog.set_acceleration_x(0.2);
-		}
-		if (frog.rect.top < bee.rect.top){
-			frog.rect.top = bee.rect.top - frog.rect.height;
-			frog.set_acceleration_y(-0.2);
-		}
-		if (frog.rect.top > bee.rect.top){
-			frog.rect.top = bee.rect.top + bee.rect.height;
-			frog.set_acceleration_y(0.2);
+		if (!frog.on_tongue){
+			if (frog.rect.left < bee.rect.left){
+				frog.set_acceleration_x(-0.2);
+			}
+			if (frog.rect.left > bee.rect.left){
+				frog.set_acceleration_x(0.2);
+			}
+			if (frog.rect.top < bee.rect.top){
+				frog.rect.top = bee.rect.top - frog.rect.height;
+				frog.set_acceleration_y(-0.2);
+			}
+			if (frog.rect.top > bee.rect.top){
+				frog.rect.top = bee.rect.top + bee.rect.height;
+				frog.set_acceleration_y(0.2);
+			}
 		}
 		if (lifes_count == 0){
 			if (music.getStatus() == music.Playing) music.stop();
@@ -401,7 +403,7 @@ void Game::processEvents(float time)
 			}
 			
 			if (frog.on_tongue){
-				float current_angle = tongue.sprite.getRotation();
+				current_angle = tongue.sprite.getRotation();
 				//std::cout << current_angle << std::endl;
 				if (current_angle > left_angle_border && current_angle < 90){ // define III part
 					delta_angle *= -1;
@@ -494,6 +496,8 @@ void Game::processEvents(float time)
 					hearts[0].set_full();
 					reset_text.setColor(Color::Transparent);
 					game_over_text.setColor(Color::Transparent);
+					game_over_music.stop();
+					music.play();
 				}
 			}
 		}
@@ -622,9 +626,30 @@ void Game::processEvents(float time)
 			tongue.sprite.setScale(0.001f, 0.001f);
 			tongue.rect.height = tongue.original_height * tongue.sprite.getScale().y;
 
+			std::cout << "curr = "<<current_angle << "delta = "<<delta_angle<< std::endl;
+
 			if (frog.on_tongue){
-				//frog.set_acceleration_x(0.2); 
-				//frog.set_acceleration_y(-0.2);
+				float acceleration_x = 0.2;
+				float acceleration_y = 0.5;
+				if (delta_angle > 0){
+					acceleration_x *= -1;
+				}
+				float delta_angle_acceleration;
+				if (current_angle > 90){
+					delta_angle_acceleration = 360 - current_angle;
+				}
+				else{
+					delta_angle_acceleration = current_angle;
+				}
+				acceleration_y = acceleration_y / 90 * delta_angle_acceleration;
+				if (delta_angle_acceleration <= 45){
+					acceleration_x = acceleration_x / 45 * delta_angle_acceleration;
+				}
+				else{
+					acceleration_x = acceleration_x / 45 * (90 - delta_angle_acceleration);
+				}
+				frog.set_acceleration_x(acceleration_x);
+				frog.set_acceleration_y(-acceleration_y);
 				frog.on_tongue = false;
 			}
 			
