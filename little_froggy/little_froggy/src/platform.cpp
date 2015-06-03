@@ -116,7 +116,7 @@ void Platform::update(float time){
 		{
 				clock.restart();
 		}	
-		if (timer > 1 && crashed){
+		if (timer > 3 && crashed){
 			rect.top += screen_size.y;
 			timer = 0;
 		}

@@ -10,6 +10,10 @@ Elixir::Elixir(Texture &image){
 }
 
 void Elixir::update(){
+	if (int(border) % 2000 == 0){
+		rect.left = border + screen_size.x;
+		rect.top = 200 + rand() % 150;
+	}
 	sprite.setPosition(rect.left - offset_x, rect.top - offset_y);
 }
 void Elixir::set_current_position(float curr_pos_x, float curr_pos_y){

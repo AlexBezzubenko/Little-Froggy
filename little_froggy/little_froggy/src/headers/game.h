@@ -47,6 +47,8 @@ public:
 
 private:
 	bool game_is_running;
+	bool game_over;
+
 	int lifes_count;
 	int game_mode;
 	int game_speed = 400;
@@ -64,8 +66,8 @@ private:
 	Fly fly;
 	Bee bee;
 	Heart hearts[hearts_count];
-	Strawberry *bonus_strawberry;
-	Elixir *bonus_elixir;
+	Strawberry bonus_strawberry;
+	Elixir bonus_elixir;
 
 	Coin coin[coin_count];
 	Cloud clouds[clouds_count];
@@ -80,9 +82,10 @@ private:
 	Texture *menu_texture;
 
 	FloatRect rect;
-	Sprite s_map;
+	Sprite sprite_map;
 
-	Text text;
+	Text game_over_text;
+	Text reset_text;
 	Text score_text;
 	Font font;
 };

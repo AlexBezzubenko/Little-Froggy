@@ -10,6 +10,10 @@ Strawberry::Strawberry(Texture &image){
 }
 
 void Strawberry::update(){
+	if (int(border) % 3000 == 0){
+		rect.left = border + screen_size.x + rand() % 500;
+		rect.top = 200 + rand() % 150;
+	}
 	sprite.setPosition(rect.left - offset_x, rect.top - offset_y);
 }
 void Strawberry::set_current_position(float curr_pos_x, float curr_pos_y){

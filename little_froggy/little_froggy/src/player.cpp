@@ -17,6 +17,7 @@ Player::Player(Texture &image) {		// constructor
 	acceleration_y = 0;
 	on_tongue = false;
 	tongue_out = false;
+	alive = true;
 }
 
 
@@ -39,6 +40,13 @@ void Player::change_acceleration_y(float dy){
 	this->acceleration_y += dy;
 }
 
+void Player::kill(){
+	onground = true;
+	alive = false;
+	set_acceleration_x(0);
+	set_acceleration_y(0);
+	sprite.setTextureRect(IntRect(220, 0, 100, 125));
+}
 void Player::update(float time) {
 	
 	rect.left += acceleration_x*time;
@@ -59,7 +67,7 @@ void Player::update(float time) {
 		sprite.setTextureRect(IntRect(28, 4, 90, 130)); 
 		sprite.setScale(0.9, 0.9); 
 	}
-	if (acceleration_y == 0) { 
+	if (acceleration_y == 0 && alive) { 
 		rect.height = 110*0.9; 
 		sprite.setTextureRect(IntRect(125, 4, 90, 110)); 
 		sprite.setScale(0.9, 0.9);
@@ -126,15 +134,23 @@ void Player::Collision(int dir) {
 }
 
 void Player::respawn(){
-	int k = 0;
+	alive = true;
+	sprite.setTextureRect(IntRect(125, 4, 90, 110));
+	
+	int available = 0;
 	for (int i = 0; i < plats_count; i++){
-		if (plats[i].type != 4){
-			k = i;
+		if (plats[i].type != 4 && plats[i].rect.left > border
+			&& plats[i].rect.top < screen_size.y){
+			available = i;
 			break;
 		}
 	}
-	rect.left = plats[k].rect.left + 20;
-	rect.top = plats[k].rect.top - 100;
+
+	rect.left = plats[available].rect.left + 20;
+	rect.top = plats[available].rect.top - 100;
+	if (rect.left > border + screen_size.x / 2){
+		offset_x = rect.left - screen_size.x / 2;
+	}
 }
 
 void Player::draw(RenderWindow &window){

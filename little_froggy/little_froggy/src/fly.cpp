@@ -9,6 +9,8 @@ Fly::Fly(Texture &image, const IntRect intrects[]){
 	}
 	sprite.setTexture(image);	
 	rect = FloatRect(400, 300, 60, 60);
+	current_position.x = 400;
+	current_position.y = 300;
 	sprite.setTextureRect(this->intrects[0]);
 	
 	acceleration_x = 0.03;
@@ -18,7 +20,9 @@ Fly::Fly(Texture &image, const IntRect intrects[]){
 
 void Fly::update(float time){
 	if (rect.left + rect.width < border){
-		set_current_position(rect.left + screen_size.x, 500);
+		int pos_x = rect.left + screen_size.x + rand() % 1000;
+		int pos_y = 200 + rand() % 300;
+		set_current_position(pos_x, pos_y);
 	}
 	if (eaten){
 		rect.left += screen_size.x;
@@ -108,12 +112,7 @@ void Fly::stop(){
 }
 
 bool Fly::is_eaten(){
-	if (eaten){
-		return true;
-	}
-	else {
-		return false;
-	}
+	return eaten;
 }
 
 void Fly::draw(RenderWindow &window){

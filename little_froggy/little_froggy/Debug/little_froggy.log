@@ -1,9 +1,70 @@
-﻿Сборка начата 03.06.2015 19:48:54.
+﻿Сборка начата 04.06.2015 0:09:26.
      1>Проект "E:\курсовая\Little-Froggy\little_froggy\little_froggy\little_froggy.vcxproj" в узле 2 (целевые объекты Build).
-     1>Link:
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\SFML-2.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D SFML_DYNAMIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\game.cpp
+         game.cpp
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers\sun.h(11): warning C4305: инициализация: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers\sun.h(12): warning C4305: инициализация: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers\sun.h(13): warning C4305: инициализация: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers\sun.h(14): warning C4305: инициализация: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers\game.h(55): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers\game.h(56): warning C4305: инициализация: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(53): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(81): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(88): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(92): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(155): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(180): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(181): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(197): warning C4244: =: преобразование "const int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(206): warning C4244: =: преобразование "const int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(217): warning C4244: =: преобразование "const int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(245): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(248): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(252): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(256): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(306): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(311): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(323): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(341): warning C4305: аргумент: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(376): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(383): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(384): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(400): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(449): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(455): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(464): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(468): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(527): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(532): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(557): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(558): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(561): warning C4305: =: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(562): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(578): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(610): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(611): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\game.cpp(633): warning C4305: =: усечение из "double" к "float"
+       Link:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\курсовая\Little-Froggy\little_froggy\Debug\little_froggy.exe" /INCREMENTAL /NOLOGO /LIBPATH:"E:\SFML-2.2\lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\курсовая\Little-Froggy\little_froggy\Debug\little_froggy.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\курсовая\Little-Froggy\little_froggy\Debug\little_froggy.lib" /MACHINE:X86 Debug\cloud.obj
+         Debug\elixir.obj
+         Debug\bee.obj
+         Debug\fly.obj
+         Debug\heart.obj
+         Debug\main.obj
+         Debug\arrow.obj
+         Debug\coin.obj
+         Debug\floor.obj
+         Debug\game.obj
+         Debug\menu.obj
+         Debug\platform.obj
+         Debug\player.obj
+         Debug\sun.obj
+         Debug\tongue.obj
+         Debug\strawberry.obj
          little_froggy.vcxproj -> E:\курсовая\Little-Froggy\little_froggy\Debug\little_froggy.exe
      1>Сборка проекта "E:\курсовая\Little-Froggy\little_froggy\little_froggy\little_froggy.vcxproj" завершена (целевые объекты Build).
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:00.16
+Затраченное время: 00:00:02.53
