@@ -17,17 +17,19 @@ Fly::Fly(Texture &image, const IntRect intrects[]){
 	current_frame = 0;
 	eaten = false;
 }
-
+FloatRect Fly::get_rect(){
+	return rect;
+}
 void Fly::update(float time){
 	if (rect.left + rect.width < border){
-		int pos_x = rect.left + screen_size.x + rand() % 1000;
+		int pos_x = rect.left + SCREEN_SIZE.x + rand() % 1000;
 		int pos_y = 200 + rand() % 300;
 		set_current_position(pos_x, pos_y);
 	}
 	if (eaten){
-		rect.left += screen_size.x;
+		rect.left += SCREEN_SIZE.x;
 		eaten = false;
-		current_position.x += screen_size.x;
+		current_position.x += SCREEN_SIZE.x;
 		acceleration_x = 0.03;
 		acceleration_y = 0.03;
 	}

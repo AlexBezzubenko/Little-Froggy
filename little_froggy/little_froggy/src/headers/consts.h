@@ -9,17 +9,17 @@ extern float offset_y ;
 extern float border;
 extern int score;
 
-const int plats_count = 4;
-const int floor_count = 8;
-const int coin_count = 4;
-const int clouds_count = 2;
-const int hearts_count = 3;
+const int PLATS_COUNT = 4;
+const int FLOOR_COUNT = 8;
+const int COIN_COUNT = 4;
+const int CLOUDS_COUNT = 2;
+const int HEARTS_COUNT = 3;
 
-extern Platform plats[plats_count];
+extern Platform plats[PLATS_COUNT];
 
-const struct screen_size{
+const struct SCREEN_SIZE{
 	int x = 1366;
 	int y = 768;
-} screen_size;
+} SCREEN_SIZE;
 
 #endif

@@ -8,10 +8,12 @@ Elixir::Elixir(Texture &image){
 	rect = FloatRect(100, 100, 38, 46);
 	sprite.setTextureRect(IntRect(383, 134, 38, 46));
 }
-
+FloatRect Elixir::get_rect(){
+	return rect;
+}
 void Elixir::update(){
 	if (int(border) % 2000 == 0){
-		rect.left = border + screen_size.x;
+		rect.left = border + SCREEN_SIZE.x;
 		rect.top = 200 + rand() % 150;
 	}
 	sprite.setPosition(rect.left - offset_x, rect.top - offset_y);

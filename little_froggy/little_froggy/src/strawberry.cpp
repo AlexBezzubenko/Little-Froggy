@@ -8,10 +8,12 @@ Strawberry::Strawberry(Texture &image){
 	rect = FloatRect(100, 100, 45, 50);
 	sprite.setTextureRect(IntRect(333, 132, 44, 49));
 }
-
+FloatRect Strawberry::get_rect(){
+	return rect;
+}
 void Strawberry::update(){
 	if (int(border) % 3000 == 0){
-		rect.left = border + screen_size.x + rand() % 500;
+		rect.left = border + SCREEN_SIZE.x + rand() % 500;
 		rect.top = 200 + rand() % 150;
 	}
 	sprite.setPosition(rect.left - offset_x, rect.top - offset_y);

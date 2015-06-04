@@ -10,9 +10,16 @@ Coin::Coin(Texture &image){
 	sprite.setTextureRect(IntRect(420, 200, 65, 65));
 }
 
+FloatRect Coin::get_rect(){
+	return rect;
+}
+void Coin::set_coordinates(float left, float top){
+	rect.left = left;
+	rect.top = top;
+}
 void Coin::update(){
 	if (rect.left + rect.width < border){
-		rect.left += screen_size.x + rand() % 100;
+		rect.left += SCREEN_SIZE.x + rand() % 100;
 		int position_y = rand() % 250 + 100;
 		rect.top = position_y;
 	}

@@ -17,7 +17,7 @@ Cloud::Cloud(Texture &image, int type){
 }
 
 void Cloud::update(float time){
-	if (rect.left > border + screen_size.x - offset_x
+	if (rect.left > border + SCREEN_SIZE.x - offset_x
 		){
 		rect.left = border - rect.width - offset_x;
 	}

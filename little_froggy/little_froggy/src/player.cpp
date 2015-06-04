@@ -40,6 +40,51 @@ void Player::change_acceleration_y(float dy){
 	this->acceleration_y += dy;
 }
 
+FloatRect Player::get_rect(){
+	return rect;
+}
+bool Player::is_on_tongue(){
+	return on_tongue;
+}
+bool Player::is_tongue_out(){
+	return tongue_out;
+}
+bool Player::is_on_ground(){
+	return onground;
+}
+void Player::set_on_tongue(bool state){
+	on_tongue = state;
+}
+void Player::set_tongue_out(bool state){
+	tongue_out = state;
+}
+void Player::set_on_ground(bool state){
+	onground = state;
+}
+void Player::set_alive(bool state){
+	alive = state;
+}
+Vector2i Player::get_mouth(){
+	return mouth;
+}
+void Player::set_point_1(Vector2i point){
+	point_1 = point;
+}
+void Player::set_point_2(Vector2i point){
+	point_2 = point;
+}
+Vector2i Player::get_point_1(){
+	return point_1;
+}
+Vector2i Player::get_point_2(){
+	return point_2;
+}
+void Player::set_rect_left(float left){
+	rect.left = left;
+}
+void Player::set_rect_top(float top){
+	rect.top = top;
+}
 void Player::kill(){
 	onground = true;
 	alive = false;
@@ -60,7 +105,7 @@ void Player::update(float time) {
 	} //gravity
 	
 	rect.top += acceleration_y*time;
-	if (!on_tongue) onground = false; //BOT KOC9lK
+	if (!on_tongue) onground = false;
 	
 	Collision(1);
 
@@ -86,16 +131,16 @@ void Player::update(float time) {
 		set_acceleration_x(0); 
 		set_acceleration_y(0.001); 
 	}
-	for (int i = 0; i < plats_count; i++) {
-		if (onground && rect.left + rect.width > plats[i].rect.left
-			&& rect.left < plats[i].rect.left + plats[i].rect.width){
-			plats[i].frog_on = true;
-			if (plats[i].type == 2 && !on_tongue){
-				 set_acceleration_x(plats[i].dx);
+	for (int i = 0; i < PLATS_COUNT; i++) {
+		if (onground && rect.left + rect.width > plats[i].get_rect().left
+			&& rect.left < plats[i].get_rect().left + plats[i].get_rect().width){
+			plats[i].set_frog_on(true);
+			if (plats[i].get_type() == 2 && !on_tongue){
+				set_acceleration_x(plats[i].get_acceleration_x());
 			}
 		}
 		else {
-			plats[i].frog_on = false;
+			plats[i].set_frog_on(false);
 			}
 	}
 	
@@ -108,23 +153,23 @@ void Player::update(float time) {
 }
 
 void Player::Collision(int dir) {
-	for (int i = 0; i < plats_count; i++) {
-		if (rect.intersects(plats[i].temp)) {
+	for (int i = 0; i < PLATS_COUNT; i++) {
+		if (rect.intersects(plats[i].get_help_rect())) {
 			if (acceleration_x > 0 && dir == 0) {
-				rect.left = plats[i].temp.left - rect.width;
+				rect.left = plats[i].get_help_rect().left - rect.width;
 				set_acceleration_x(0);
 			}
 			if (acceleration_x < 0 && dir == 0) {
-				rect.left = plats[i].temp.left + plats[i].temp.width;
+				rect.left = plats[i].get_help_rect().left + plats[i].get_help_rect().width;
 				set_acceleration_x(0);
 			}
 			if (acceleration_y > 0 && dir == 1) {
-				rect.top = plats[i].temp.top - rect.height;
+				rect.top = plats[i].get_help_rect().top - rect.height;
 				set_acceleration_y(0);
 				onground = true;
 			}
 			if (acceleration_y < 0 && dir == 1) {
-				rect.top = plats[i].rect.top + plats[i].rect.height;
+				rect.top = plats[i].get_rect().top + plats[i].get_rect().height;
 				set_acceleration_y(0);
 				set_acceleration_x(0);
 				onground = false;
@@ -138,18 +183,18 @@ void Player::respawn(){
 	sprite.setTextureRect(IntRect(125, 4, 90, 110));
 	
 	int available = 0;
-	for (int i = 0; i < plats_count; i++){
-		if (plats[i].type != 4 && plats[i].rect.left > border
-			&& plats[i].rect.top < screen_size.y){
+	for (int i = 0; i < PLATS_COUNT; i++){
+		if (plats[i].get_type() != 4 && plats[i].get_rect().left > border
+			&& plats[i].get_rect().top < SCREEN_SIZE.y){
 			available = i;
 			break;
 		}
 	}
 
-	rect.left = plats[available].rect.left + 20;
-	rect.top = plats[available].rect.top - 100;
-	if (rect.left > border + screen_size.x / 2){
-		offset_x = rect.left - screen_size.x / 2;
+	rect.left = plats[available].get_rect().left + 20;
+	rect.top = plats[available].get_rect().top - 100;
+	if (rect.left > border + SCREEN_SIZE.x / 2){
+		offset_x = rect.left - SCREEN_SIZE.x / 2;
 	}
 }
 

@@ -4,14 +4,16 @@
 
 using namespace sf;
 class Coin{
+public:
+	Coin();
+	Coin(Texture &image);
+	FloatRect get_rect();
+	void set_coordinates(float left, float top);
+	void update();
+	void draw(RenderWindow &window);
 private:
 	Texture texture;
 	Sprite sprite;
-public:
 	FloatRect rect;
-	Coin();
-	Coin(Texture &image);
-	void update();
-	void draw(RenderWindow &window);
 };
 #endif

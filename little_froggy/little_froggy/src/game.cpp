@@ -7,7 +7,7 @@ float offset_y = 0;
 float border = 0;
 int score = 0;
 
-Platform plats[plats_count];
+Platform plats[PLATS_COUNT];
 
 Game::Game() 
 {
@@ -29,14 +29,14 @@ Game::Game()
 
 	frog = *game_texture;
 	arrow = *game_texture;
-	for (int i = 0; i < clouds_count; i++){
+	for (int i = 0; i < CLOUDS_COUNT; i++){
 		clouds[i] = { *game_texture, i};
 	}
 	sun = *game_texture;
 	tongue = *game_texture;
 	
-	fly = { *game_texture, intrect_plats_fly };
-	bee = { *game_texture, intrect_plats_bee };
+	fly = { *game_texture, INTRECT_PLATS_FLY };
+	bee = { *game_texture, INTRECT_PLATS_BEE };
 
 	bonus_strawberry = *game_texture;
 	bonus_strawberry.set_current_position(-100, 300);
@@ -48,48 +48,49 @@ Game::Game()
 	fly.set_current_position(500, 400);
 	bee.set_current_position(900, 500);
 
-	for (int i = 0; i < plats_count; i++){
+	for (int i = 0; i < PLATS_COUNT; i++){
 		plats[i] = *game_texture;
-		plats[i].rect.left = i * 125 + 250 * (i + 1);
+		plats[i].set_rect_left(i * 125 + 250 * (i + 1));
 	}
 	
-	for (int i = 0; i < floor_count; i++){
+	for (int i = 0; i < FLOOR_COUNT; i++){
 		floor_[i] = *game_texture;
-		floor_[i].rect.left = i * floor_[i].rect.width;
+		floor_[i].set_rect_left(i * floor_[i].get_rect().width); 
 	}
-	for (int i = 0; i < coin_count; i++){
+	for (int i = 0; i < COIN_COUNT; i++){
 		coin[i] = *game_texture;
-		coin[i].rect.left = plats[i].rect.left + plats[i].rect.width / 2 - coin[i].rect.width / 2;
+		coin[i].set_coordinates(plats[i].get_rect().left + plats[i].get_rect().width / 2 
+								- coin[i].get_rect().width / 2, coin[i].get_rect().top);
 	}
-	for (int i = 0; i < hearts_count; i++){
+	for (int i = 0; i < HEARTS_COUNT; i++){
 		hearts[i] = *game_texture;
-		hearts[i].rect.left = 10 + i * (hearts[i].rect.width + 10);
+		hearts[i].set_rect_left(10 + i * (hearts[i].get_rect().width + 10));
 	}
 
 	hearts[0].set_full();
 	hearts[1].set_full();
 	lifes_count = 2;
 
-	plats[0].type = 0;
-	plats[1].type = 4;
+	plats[0].set_type(0);
+	plats[1].set_type(4);
 	
 	font.loadFromFile("res/ubuntu.ttf");
 	game_over_text.setFont(font);
 	game_over_text.setString("Game Over") ;	
 	game_over_text.setCharacterSize(72); 
-	game_over_text.setPosition(screen_size.x / 2 - game_over_text.getLocalBounds().width / 2,
-							   screen_size.y / 2 - 200);
+	game_over_text.setPosition(SCREEN_SIZE.x / 2 - game_over_text.getLocalBounds().width / 2,
+							   SCREEN_SIZE.y / 2 - 200);
 	game_over_text.setColor(Color::Transparent);
 
 	reset_text.setFont(font);
 	reset_text.setString("Reset");
 	reset_text.setCharacterSize(50);
-	reset_text.setPosition(screen_size.x / 2 - reset_text.getLocalBounds().width / 2,
-						   screen_size.y / 2 - 100);
+	reset_text.setPosition(SCREEN_SIZE.x / 2 - reset_text.getLocalBounds().width / 2,
+						   SCREEN_SIZE.y / 2 - 100);
 	reset_text.setColor(Color::Transparent);
 
 	score_text.setFont(font);
-	score_text.setPosition(screen_size.x - 300, 0);
+	score_text.setPosition(SCREEN_SIZE.x - 300, 0);
 	score_text.setCharacterSize(50);
 	score_text.setColor(Color::Red);
 	
@@ -100,13 +101,13 @@ Game::Game()
 
 void Game::run()
 {
-	window.create(VideoMode(screen_size.x, screen_size.y), "Little froggy"
+	window.create(VideoMode(SCREEN_SIZE.x, SCREEN_SIZE.y), "Little froggy"
 	//	, Style::Fullscreen
 		);
 	bool fullscreen = false;
 	if (fullscreen){
-		for (int i = 0; i < floor_count; i++){
-			floor_[i].rect.top += floor_[i].rect.height;
+		for (int i = 0; i < FLOOR_COUNT; i++){
+			floor_[i].set_rect_top(floor_[i].get_rect().top + floor_[i].get_rect().height);
 		}
 	}
 	window.setFramerateLimit(240);
@@ -169,56 +170,56 @@ void Game::run()
 }
 void Game::object_update(float time) // =border
 {
-	if (frog.rect.left > border + screen_size.x / 2){
-		border = frog.rect.left - screen_size.x / 2;
+	if (frog.get_rect().left > border + SCREEN_SIZE.x / 2){
+		border = frog.get_rect().left - SCREEN_SIZE.x / 2;
 		std::cout << "border"<< border << std::endl;
 	}
 
-	arrow.rect.left = frog.rect.left + frog.rect.width / 2;
-	arrow.rect.top = frog.rect.top + 40;
-	if (frog.tongue_out && !frog.on_tongue){
-		tongue.rect.left = frog.mouth.x + tongue.rect.height * sin(tongue.sprite.getRotation()*3.1415/180);
-		tongue.rect.top = frog.mouth.y - tongue.rect.height * cos(tongue.sprite.getRotation()*3.1415 / 180);
+	arrow.set_coordinates(frog.get_rect().left + frog.get_rect().width / 2, frog.get_rect().top + 40);
+	
+	if (frog.is_tongue_out() && !frog.is_on_tongue()){
+		tongue.set_rect_left(frog.get_mouth().x + tongue.get_rect().height * sin(tongue.get_sprite().getRotation() * 3.1415 / 180));
+		tongue.set_rect_top(frog.get_mouth().y - tongue.get_rect().height * cos(tongue.get_sprite().getRotation() * 3.1415 / 180));
 	}
-	for (int i = 0; i < plats_count; i++) {
+	for (int i = 0; i < PLATS_COUNT; i++) {
 		plats[i].update(time);
 
-		if (plats[i].type == 1 && !frog.on_tongue){
-			if (frog.onground && plats[i].temp.top >= frog.rect.top - frog.rect.height){
-				if (frog.rect.left > plats[i].rect.left - frog.rect.width
-					&& frog.rect.left < plats[i].rect.left + plats[i].rect.width) {
-					frog.rect.top = plats[i].temp.top - frog.rect.height;
+		if (plats[i].get_type() == 1 && !frog.is_on_tongue()){
+			if (frog.is_on_ground() && plats[i].get_help_rect().top >= frog.get_rect().top - frog.get_rect().height){
+				if (frog.get_rect().left > plats[i].get_rect().left - frog.get_rect().width
+					&& frog.get_rect().left < plats[i].get_rect().left + plats[i].get_rect().width) {
+					frog.set_rect_top(plats[i].get_help_rect().top - frog.get_rect().height);
 				}
 			}
 		}		
 	}
-	for (int i = 0; i < coin_count; i++){
-		if (frog.rect.intersects(coin[i].rect)){
-			coin[i].rect.top = screen_size.y;
+	for (int i = 0; i < COIN_COUNT; i++){
+		if (frog.get_rect().intersects(coin[i].get_rect())){
+			coin[i].set_coordinates(coin[i].get_rect().left, SCREEN_SIZE.y);
 			score += 1;
 		}
 	}
-	if (frog.rect.intersects(bonus_elixir.rect)){
+	if (frog.get_rect().intersects(bonus_elixir.get_rect())){
 		if (lifes_count < 3){
 			lifes_count++;
 		}
 		hearts[lifes_count - 1].set_full();
-		bonus_elixir.rect.top = screen_size.y;
+		bonus_elixir.set_current_position(border + SCREEN_SIZE.x / 2, SCREEN_SIZE.y); 
 	}
 	
-	if (frog.rect.intersects(bonus_strawberry.rect)){
+	if (frog.get_rect().intersects(bonus_strawberry.get_rect())){
 		lifes_count += 3;
 		if (lifes_count > 3){
 			lifes_count = 3;
 		}
-		for (int i = 0; i < hearts_count; i++){
+		for (int i = 0; i < HEARTS_COUNT; i++){
 			hearts[i].set_full();
 		}
-		bonus_strawberry.rect.top = screen_size.y;
+		bonus_strawberry.set_current_position(border + SCREEN_SIZE.x / 2, SCREEN_SIZE.y);
 	}
 	
-	for (int i = 0; i < floor_count; i++){
-		if (frog.rect.top + frog.rect.height > floor_[i].rect.top + floor_[i].rect.height / 3){
+	for (int i = 0; i < FLOOR_COUNT; i++){
+		if (frog.get_rect().top + frog.get_rect().height > floor_[i].get_rect().top + floor_[i].get_rect().height / 3){
 			if (lifes_count > 0){
 				hearts[lifes_count - 1].set_empty();
 				lifes_count--;
@@ -236,24 +237,24 @@ void Game::object_update(float time) // =border
 			}
 		}
 	}
-	if (frog.rect.intersects(bee.rect)){
+	if (frog.get_rect().intersects(bee.get_rect())){
 		if (lifes_count > 0){
 			hearts[lifes_count - 1].set_empty();
 			lifes_count--;
 		}
-		if (!frog.on_tongue){
-			if (frog.rect.left < bee.rect.left){
+		if (!frog.is_on_tongue()){
+			if (frog.get_rect().left < bee.get_rect().left){
 				frog.set_acceleration_x(-0.2);
 			}
-			if (frog.rect.left > bee.rect.left){
+			if (frog.get_rect().left > bee.get_rect().left){
 				frog.set_acceleration_x(0.2);
 			}
-			if (frog.rect.top < bee.rect.top){
-				frog.rect.top = bee.rect.top - frog.rect.height;
+			if (frog.get_rect().top < bee.get_rect().top){
+				frog.set_rect_top(bee.get_rect().top - frog.get_rect().height);
 				frog.set_acceleration_y(-0.2);
 			}
-			if (frog.rect.top > bee.rect.top){
-				frog.rect.top = bee.rect.top + bee.rect.height;
+			if (frog.get_rect().top > bee.get_rect().top){
+				frog.set_rect_top(bee.get_rect().top + bee.get_rect().height);
 				frog.set_acceleration_y(0.2);
 			}
 		}
@@ -272,18 +273,18 @@ void Game::object_update(float time) // =border
 	bee.update(time);
 	bonus_strawberry.update();
 	bonus_elixir.update();
-	for (int i = 0; i < clouds_count; i++){
+	for (int i = 0; i < CLOUDS_COUNT; i++){
 		clouds[i].update(time);
 	}
 	sun.update(time);
 	
-	for (int i = 0; i < floor_count; i++){
+	for (int i = 0; i < FLOOR_COUNT; i++){
 		floor_[i].update();
 	}
-	for (int i = 0; i < coin_count; i++){
+	for (int i = 0; i < COIN_COUNT; i++){
 		coin[i].update();
 	}
-	for (int i = 0; i < hearts_count; i++){
+	for (int i = 0; i < HEARTS_COUNT; i++){
 		hearts[i].update();
 	}
 	std::stringstream score_str;    
@@ -304,32 +305,32 @@ void Game::processEvents(float time)
 	}
 	if (game_mode == 2){
 		if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)){
-			if (frog.get_acceleration_x() > -0.3 && !frog.onground){
+			if (frog.get_acceleration_x() > -0.3 && !frog.is_on_ground()){
 				frog.change_acceleration_x(-0.002);
 			}
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) {
-			if (frog.get_acceleration_x() < 0.3 && !frog.onground){
+			if (frog.get_acceleration_x() < 0.3 && !frog.is_on_ground()){
 				frog.change_acceleration_x(0.002);
 			}
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Space) || (Keyboard::isKeyPressed(Keyboard::Up))) {
-			if (frog.onground) {
-				frog.rect.top -= 20;
+			if (frog.is_on_ground()) {
+				frog.set_rect_top(frog.get_rect().top - 20);
 				frog.set_acceleration_y(-0.5);
-				frog.onground = false;
+				frog.set_on_ground(false);
 			}
 		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::S) && !frog.onground) {
+	if (Keyboard::isKeyPressed(Keyboard::S) && !frog.is_on_ground()) {
 		frog.set_acceleration_y(0.3);
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::R)){
 		offset_y = 0;
-		frog.alive = true;
-		frog.rect.left = border + 250;
-		frog.rect.top = 50;
+		frog.set_alive(true);
+		frog.set_rect_left(border + 250);
+		frog.set_rect_top(50);
 		frog.set_acceleration_x(0);
 		frog.set_acceleration_y(0);
 		game_over_text.setColor(Color::Transparent);
@@ -338,46 +339,40 @@ void Game::processEvents(float time)
 		music.stop();
 		window.close();
 	}
-	if (Keyboard::isKeyPressed(Keyboard::W) && !frog.on_tongue){
-		frog.rect.top -= 20;
-		frog.set_acceleration_y(-0.2);
-	}
-	
-	
 	
 	if (Mouse::isButtonPressed(Mouse::Right)){
-		tongue.dot = Mouse::getPosition(window);
+		tongue.set_dot(Mouse::getPosition(window));
 
-		for (int i = 0; i < plats_count; i++) {
+		for (int i = 0; i < PLATS_COUNT; i++) {
 			double distance_x, distance_y;
 		
-			distance_x = frog.mouth.x - (tongue.dot.x + offset_x + tongue.rect.width / 2);
-			distance_y = plats[i].rect.top + plats[i].rect.height - frog.mouth.y;
+			distance_x = frog.get_mouth().x - (tongue.get_dot().x + offset_x + tongue.get_rect().width / 2);
+			distance_y = plats[i].get_rect().top + plats[i].get_rect().height - frog.get_mouth().y;
 			double distance = sqrt(pow(abs(distance_y), 2) + pow(abs(distance_x), 2));
 
-			if (plats[i].rect.left - offset_x < tongue.dot.x
-				&& tongue.dot.x < (plats[i].rect.left + plats[i].rect.width - offset_x)
-				&& tongue.dot.y < frog.rect.top + frog.rect.height
-				&& plats[i].type == 4
-				&& !frog.on_tongue
-				&& distance < screen_size.y / 2 + 150
+			if (plats[i].get_rect().left - offset_x < tongue.get_dot().x
+				&& tongue.get_dot().x < (plats[i].get_rect().left + plats[i].get_rect().width - offset_x)
+				&& tongue.get_dot().y < frog.get_rect().top + frog.get_rect().height
+				&& plats[i].get_type() == 4
+				&& !frog.is_on_tongue()
+				&& distance < SCREEN_SIZE.y / 2 + 150
 				//&& !frog.tongue_out
 				){
-				tongue.rect.left = tongue.dot.x + offset_x;						// set the tongue's high point
-				tongue.rect.top = plats[i].rect.top + plats[i].rect.height - 5;
+				tongue.set_rect_left(tongue.get_dot().x + offset_x);						// set the tongue's high point
+				tongue.set_rect_top(plats[i].get_rect().top + plats[i].get_rect().height - 5);
 				/// set the direction
-				if (frog.rect.left > plats[i].rect.left + plats[i].rect.width / 2){
+				if (frog.get_rect().left > plats[i].get_rect().left + plats[i].get_rect().width / 2){
 					delta_angle = abs(delta_angle);
 				}
-				if (frog.rect.left + frog.rect.width < plats[i].rect.left + plats[i].rect.width / 2) {
+				if (frog.get_rect().left + frog.get_rect().width < plats[i].get_rect().left + plats[i].get_rect().width / 2) {
 					delta_angle = -1 * abs(delta_angle);
 				}
 				
 
 				if (distance_y < 0) {
-					tongue.sprite.setScale(1.f, distance / tongue.original_height);
+					tongue.set_sprite_scale(1.f, distance / tongue.get_original_height());
 				}
-				tongue.rect.height = tongue.original_height * tongue.sprite.getScale().y;
+				tongue.set_rect_height(tongue.get_original_height() * tongue.get_sprite().getScale().y);
 
 				double  angle;
 				angle = 180 / 3.1415 * atan2(abs(distance_x), abs(distance_y));
@@ -394,16 +389,16 @@ void Game::processEvents(float time)
 					left_angle_border -= 10;
 				}
 				if (distance_y < 0){
-					frog.on_tongue = true;
-					frog.onground = true;
+					frog.set_on_tongue(true);
+					frog.set_on_ground(true);
 					frog.set_acceleration_x(0);
 					frog.set_acceleration_y(0);
 				}
-				tongue.sprite.setRotation(angle);
+				tongue.set_rotation(angle);
 			}
 			
-			if (frog.on_tongue){
-				current_angle = tongue.sprite.getRotation();
+			if (frog.is_on_tongue()){
+				current_angle = tongue.get_sprite().getRotation();
 				//std::cout << current_angle << std::endl;
 				if (current_angle > left_angle_border && current_angle < 90){ // define III part
 					delta_angle *= -1;
@@ -447,33 +442,33 @@ void Game::processEvents(float time)
 				}
 
 				if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)){
-					if(frog.rect.top > plats[i].rect.top + plats[i].rect.height){
-						tongue.sprite.setScale(1.f, tongue.sprite.getScale().y - 0.005);
-						tongue.rect.height = tongue.original_height * tongue.sprite.getScale().y;
+					if (frog.get_rect().top > plats[i].get_rect().top + plats[i].get_rect().height){
+						tongue.set_sprite_scale(1.f, tongue.get_sprite().getScale().y - 0.005);
+						tongue.set_rect_height(tongue.get_original_height() * tongue.get_sprite().getScale().y);
 					}
 				}
 					if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down)){
-						if (tongue.rect.height < screen_size.y / 2 + 150){
-							tongue.sprite.setScale(1.f, tongue.sprite.getScale().y + 0.005);
-							tongue.rect.height = tongue.original_height * tongue.sprite.getScale().y;
+						if (tongue.get_rect().height < SCREEN_SIZE.y / 2 + 150){
+							tongue.set_sprite_scale(1.f, tongue.get_sprite().getScale().y + 0.005);
+							tongue.set_rect_height(tongue.get_original_height() * tongue.get_sprite().getScale().y);
 						}
 					}
 
-					tongue.sprite.setRotation(current_angle + delta_angle);
-					current_angle = tongue.sprite.getRotation();
+					tongue.set_rotation(current_angle + delta_angle);
+					current_angle = tongue.get_sprite().getRotation();
 					
-					frog.rect.top = tongue.rect.top + tongue.rect.height *
-						cos(3.1415 / 180 * current_angle) - 50; //mouth level
+					frog.set_rect_top(tongue.get_rect().top + tongue.get_rect().height *
+						cos(3.1415 / 180 * current_angle) - 50); //mouth level
 			
 					 
-					frog.rect.left = tongue.rect.left - tongue.rect.height
-						* sin(3.1415 / 180 * current_angle) - frog.rect.width / 2;
+					frog.set_rect_left(tongue.get_rect().left - tongue.get_rect().height
+						* sin(3.1415 / 180 * current_angle) - frog.get_rect().width / 2);
 					
-					if (frog.rect.left > border + screen_size.x / 2){
-						offset_x = frog.rect.left - screen_size.x / 2;
+					if (frog.get_rect().left > border + SCREEN_SIZE.x / 2){
+						offset_x = frog.get_rect().left - SCREEN_SIZE.x / 2;
 					}
-					if (frog.rect.top < 20){
-						offset_y = frog.rect.top - 20;
+					if (frog.get_rect().top < 20){
+						offset_y = frog.get_rect().top - 20;
 					} 
 				}
 		}
@@ -482,7 +477,7 @@ void Game::processEvents(float time)
 	if (event.type == event.MouseButtonPressed){
 		if (event.mouseButton.button == Mouse::Left){
 			if (game_mode == 1){
-				frog.point_1 = Mouse::getPosition(window);
+				frog.set_point_1(Mouse::getPosition(window));
 			}
 			if (game_over){
 				Vector2i cursor_position = Mouse::getPosition(window);
@@ -502,13 +497,13 @@ void Game::processEvents(float time)
 			}
 		}
 		if (event.mouseButton.button == Mouse::Right){
-			tongue.dot = Mouse::getPosition(window);
+			tongue.set_dot(Mouse::getPosition(window));
 			int k = 0;
-			for (int i = 0; i < plats_count; i++) {
-				if (!(plats[i].rect.left - offset_x < tongue.dot.x
-					&& tongue.dot.x < (plats[i].rect.left + plats[i].rect.width - offset_x)
-					&& plats[i].type == 4 
-					&& frog.on_tongue
+			for (int i = 0; i < PLATS_COUNT; i++) {
+				if (!(plats[i].get_rect().left - offset_x < tongue.get_dot().x
+					&& tongue.get_dot().x < (plats[i].get_rect().left + plats[i].get_rect().width - offset_x)
+					&& plats[i].get_type() == 4 
+					&& frog.is_on_tongue()
 					)){
 					k++;
 					break;
@@ -516,29 +511,29 @@ void Game::processEvents(float time)
 			}
 			
 			if(k > 0){
-				    tongue.dot = Mouse::getPosition();
-					tongue.rect.left = tongue.dot.x + offset_x;
-					tongue.rect.top = tongue.dot.y + offset_y;
+					tongue.set_dot(Mouse::getPosition());
+					tongue.set_rect_left(tongue.get_dot().x + offset_x);
+					tongue.set_rect_top(tongue.get_dot().y + offset_y);
 
 					double distance_x, distance_y;
-					distance_x = frog.mouth.x - (tongue.rect.left + tongue.rect.width / 2);
-					distance_y = tongue.rect.top - frog.mouth.y;
+					distance_x = frog.get_mouth().x - (tongue.get_rect().left + tongue.get_rect().width / 2);
+					distance_y = tongue.get_rect().top - frog.get_mouth().y;
 					double distance = sqrt(pow(abs(distance_y), 2) + pow(abs(distance_x), 2));
 
-					if (distance > screen_size.y / 2){
-						distance = screen_size.y / 2;
+					if (distance > SCREEN_SIZE.y / 2){
+						distance = SCREEN_SIZE.y / 2;
 					}
-						tongue.sprite.setScale(1.f, distance / tongue.original_height);
-						tongue.rect.height = tongue.original_height * tongue.sprite.getScale().y;
+					tongue.set_sprite_scale(1.f, distance / tongue.get_original_height());
+					tongue.set_rect_height(tongue.get_original_height() * tongue.get_sprite().getScale().y);
 
 						double  angle;
 						angle = 180 / 3.1415 * atan2(distance_x, distance_y);
-						tongue.sprite.setRotation(angle + 180);
+						tongue.set_rotation(angle + 180);
 
-						frog.on_tongue = false;
-						frog.tongue_out = true;
+						frog.set_on_tongue(false);
+						frog.set_tongue_out(true);
 					
-						if (fly.check_is_inrect(tongue.dot)){
+						if (fly.check_is_inrect(tongue.get_dot())){
 							fly.stop();
 							if (lifes_count < 3){
 								lifes_count++;
@@ -551,35 +546,38 @@ void Game::processEvents(float time)
 ///////////////////////////////////////////////////////////////////////////////
 	if (event.type == event.MouseMoved){
 		if (game_mode == 1){
-			frog.point_2 = Mouse::getPosition(window);
+			frog.set_point_2(Mouse::getPosition(window));
 
-			if (frog.rect.left - offset_x < frog.point_1.x
-				&& frog.point_1.x < frog.rect.left + frog.rect.width - offset_x
-				&& frog.rect.top - offset_y < frog.point_1.y
-				&& frog.point_1.y < frog.rect.top + frog.rect.height - offset_y){
+			if (frog.get_rect().left - offset_x < frog.get_point_1().x
+				&& frog.get_point_1().x < frog.get_rect().left + frog.get_rect().width - offset_x
+				&& frog.get_rect().top - offset_y < frog.get_point_1().y
+				&& frog.get_point_1().y < frog.get_rect().top + frog.get_rect().height - offset_y){
 
-				frog.point_1.x = frog.rect.left + frog.rect.width / 2 - offset_x;
-				frog.point_1.y = frog.rect.top + frog.rect.height / 2 - offset_y;
+				Vector2i point;
+				point.x = frog.get_rect().left + frog.get_rect().width / 2 - offset_x;
+				point.y = frog.get_rect().top + frog.get_rect().height / 2 - offset_y;
+				frog.set_point_1(point);
 
 				float scale_x, scale_y;
 				scale_x = 0.8;
-				scale_y = sqrt(pow((frog.point_1.y - frog.point_2.y), 2) + pow((frog.point_1.x - frog.point_2.x), 2)) / arrow.rect.height;
-				arrow.sprite.setScale(scale_x, scale_y);
+				scale_y = sqrt(pow((frog.get_point_1().y - frog.get_point_2().y), 2) 
+						  + pow((frog.get_point_1().x - frog.get_point_2().x), 2)) / arrow.get_height();
+				arrow.set_scale(scale_x, scale_y);
 				rect.width *= scale_x;
-				arrow.sprite.setOrigin(arrow.rect.width / 2, 0);
+				
 				int distance_x, distance_y;
-				distance_x = frog.point_1.x - frog.point_2.x;
-				distance_y = frog.point_1.y - frog.point_2.y;
+				distance_x = frog.get_point_1().x - frog.get_point_2().x;
+				distance_y = frog.get_point_1().y - frog.get_point_2().y;
 
 				double angle;
 				if (distance_x != 0){
 					angle = 180 / 3.1415 * atan2(abs(distance_y), abs(distance_x));
-					if (distance_y > 0){ arrow.sprite.setScale(0.001f, 0.001f); }
+					if (distance_y > 0){ arrow.set_scale(0.001f, 0.001f); }
 					if (distance_y <= 0 && distance_x > 0) { angle = -angle - 90; }
 					if (distance_y <= 0 && distance_x < 0){ angle = angle - 270; }
 				}
 				else { angle = 180; };
-				arrow.sprite.setRotation(angle);
+				arrow.set_rotation(angle);
 			}
 		}
 		if (game_over){
@@ -595,12 +593,12 @@ void Game::processEvents(float time)
 
 	if (event.type == event.MouseButtonReleased){
 		if (event.mouseButton.button == Mouse::Left && game_mode == 1){
-			if (frog.rect.left - offset_x < frog.point_1.x && frog.point_1.x < frog.rect.left - offset_x + 80
-				&& frog.rect.top - offset_y < frog.point_1.y && frog.point_1.y < frog.rect.top - offset_y + 80){
+			if (frog.get_rect().left - offset_x < frog.get_point_1().x && frog.get_point_1().x < frog.get_rect().left - offset_x + 80
+				&& frog.get_rect().top - offset_y < frog.get_point_1().y && frog.get_point_1().y < frog.get_rect().top - offset_y + 80){
 				double acceleration_x;
 				double acceleration_y;
-				acceleration_x = (frog.point_1.x - frog.point_2.x) * 0.0018;
-				acceleration_y = (frog.point_1.y - frog.point_2.y) * 0.0018;
+				acceleration_x = (frog.get_point_1().x - frog.get_point_2().x) * 0.0018;
+				acceleration_y = (frog.get_point_1().y - frog.get_point_2().y) * 0.0018;
 
 				if (abs(acceleration_x) > 0.5){
 					if (acceleration_x > 0) { acceleration_x = 0.5; }
@@ -610,25 +608,27 @@ void Game::processEvents(float time)
 					if (acceleration_y > 0) { acceleration_y = 0.5; }
 					if (acceleration_y < 0) { acceleration_y = -0.5; }
 				}
-				if (frog.onground){
+				if (frog.is_on_ground()){
 					frog.set_acceleration_y(acceleration_y);
 					frog.set_acceleration_x(acceleration_x);
-					frog.onground = false;
-					Mouse::setPosition(frog.point_2, window);
-					frog.rect.top -= 20;
+					frog.set_on_ground(false);
+					Mouse::setPosition(frog.get_point_2(), window);
+					frog.set_rect_top(frog.get_rect().top - 20);
 				}
-				frog.point_1.x = frog.point_1.y = frog.point_2.x = frog.point_2.y = 0;
+				Vector2i zero_point(0, 0);
+				frog.set_point_1(zero_point);
+				frog.set_point_2(zero_point);
 			}
-			arrow.sprite.setScale(0.001f, 0.001f);
+			arrow.set_scale(0.001f, 0.001f);
 		}
 
 		if (event.mouseButton.button == Mouse::Right){
-			tongue.sprite.setScale(0.001f, 0.001f);
-			tongue.rect.height = tongue.original_height * tongue.sprite.getScale().y;
+			tongue.set_sprite_scale(0.001f, 0.001f);
+			tongue.set_rect_height(tongue.get_original_height() * tongue.get_sprite().getScale().y);
 
 			std::cout << "curr = "<<current_angle << "delta = "<<delta_angle<< std::endl;
 
-			if (frog.on_tongue){
+			if (frog.is_on_tongue()){
 				float acceleration_x = 0.2;
 				float acceleration_y = 0.5;
 				if (delta_angle > 0){
@@ -650,28 +650,28 @@ void Game::processEvents(float time)
 				}
 				frog.set_acceleration_x(acceleration_x);
 				frog.set_acceleration_y(-acceleration_y);
-				frog.on_tongue = false;
+				frog.set_on_tongue(false);
 			}
 			
-			frog.onground = false;
-			frog.tongue_out = false;
+			frog.set_on_ground(false);
+			frog.set_tongue_out(false);
 			delta_angle = -0.08;
 		}
 	}
 }
 
 void Game::render(){ // =offset
-	if (frog.rect.left > border + screen_size.x / 2){
-		offset_x = frog.rect.left - screen_size.x / 2;
+	if (frog.get_rect().left > border + SCREEN_SIZE.x / 2){
+		offset_x = frog.get_rect().left - SCREEN_SIZE.x / 2;
 	}
-	if (frog.rect.top < 20){
-		offset_y = frog.rect.top - 20;
+	if (frog.get_rect().top < 20){
+		offset_y = frog.get_rect().top - 20;
 	}
 
 	window.clear();
 	window.draw(sprite_map);
 	sun.draw(window);
-	for (int i = 0; i < clouds_count; i++){
+	for (int i = 0; i < CLOUDS_COUNT; i++){
 		clouds[i].draw(window);
 	}
 	arrow.draw(window);
@@ -682,16 +682,16 @@ void Game::render(){ // =offset
 	bonus_strawberry.draw(window);
 	bonus_elixir.draw(window);
 
-	for (int i = 0; i < plats_count; i++){
+	for (int i = 0; i < PLATS_COUNT; i++){
 		plats[i].draw(window);
 	}
-	for (int i = 0; i < floor_count; i++){
+	for (int i = 0; i < FLOOR_COUNT; i++){
 		floor_[i].draw(window);
 	}
-	for (int i = 0; i < hearts_count; i++){
+	for (int i = 0; i < HEARTS_COUNT; i++){
 		hearts[i].draw(window);
 	}
-	for (int i = 0; i < coin_count; i++){
+	for (int i = 0; i < COIN_COUNT; i++){
 		coin[i].draw(window);
 	}
 	window.draw(score_text);

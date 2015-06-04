@@ -15,6 +15,12 @@ void Heart::set_full(){
 void Heart::set_empty(){
 	sprite.setTextureRect(IntRect(372, 9, 44, 44));
 }
+void Heart::set_rect_left(float left){
+	rect.left = left;
+}
+FloatRect Heart::get_rect(){
+	return rect;
+}
 void Heart::update(){
 	sprite.setPosition(rect.left, rect.top);
 }

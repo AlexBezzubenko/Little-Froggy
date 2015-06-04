@@ -15,7 +15,36 @@ Tongue::Tongue(Texture &image){
 	
 	rect.height *= sprite.getScale().y;
 }
-
+int Tongue::get_original_height(){
+	return original_height;
+}
+Vector2i Tongue::get_dot(){
+	return dot;
+}
+void Tongue::set_dot(Vector2i point){
+	dot = point;
+}
+FloatRect Tongue::get_rect(){
+	return rect;
+}
+void Tongue::set_rect_left(float left){
+	rect.left = left;
+}
+void Tongue::set_rect_top(float top){
+	rect.top = top;
+}
+void Tongue::set_rect_height(float height){
+	rect.height = height;
+}
+Sprite Tongue::get_sprite(){
+	return sprite;
+}
+void Tongue::set_sprite_scale(float scale_x, float scale_y){
+	sprite.setScale(scale_x, scale_y);
+}
+void Tongue::set_rotation(float angle){
+	sprite.setRotation(angle);
+}
 void Tongue::update(){
 	sprite.setPosition(rect.left - offset_x, rect.top - offset_y);
 }

@@ -4,7 +4,7 @@
 
 using namespace sf;
 
-const int menu_string_count = 3;
+const int MENU_STRING_COUNT = 3;
 
 class Menu{
 public:
@@ -17,6 +17,6 @@ public:
 private:
 	FloatRect rect;
 	Sprite sprite;
-	Text menu_string[menu_string_count];
+	Text menu_string[MENU_STRING_COUNT];
 };
 #endif
