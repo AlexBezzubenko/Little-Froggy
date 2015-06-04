@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClInclude Include="src\headers\cloud.h" />
     <ClInclude Include="src\headers\elixir.h" />
-    <ClInclude Include="src\headers\bee.h" />
     <ClInclude Include="src\headers\coin.h" />
     <ClInclude Include="src\headers\floor.h" />
     <ClInclude Include="src\headers\arrow.h" />
@@ -43,7 +42,6 @@
   <ItemGroup>
     <ClCompile Include="src\cloud.cpp" />
     <ClCompile Include="src\elixir.cpp" />
-    <ClCompile Include="src\bee.cpp" />
     <ClCompile Include="src\fly.cpp" />
     <ClCompile Include="src\heart.cpp" />
     <ClCompile Include="src\main.cpp" />

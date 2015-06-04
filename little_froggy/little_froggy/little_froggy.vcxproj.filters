@@ -45,9 +45,6 @@
     <ClInclude Include="src\headers\fly.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="src\headers\bee.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="src\headers\heart.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -116,9 +113,6 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="src\fly.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="src\bee.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="src\heart.cpp">

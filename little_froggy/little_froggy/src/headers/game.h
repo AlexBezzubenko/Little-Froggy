@@ -1,3 +1,9 @@
+/* Little Froggy
+ * Copyright(c) 2015 by Alex Bezzubenko
+ * Distributed under the Boost Software License, Version 1.0.
+ * http://www.boost.org/LICENSE_1_0.txt
+ */
+
 #ifndef GAME_H
 #define GAME_H
 #include <SFML/Graphics.hpp>
@@ -10,7 +16,6 @@
 #include "headers/consts.h"
 #include "headers/tongue.h"
 #include "headers/fly.h"
-#include "headers/bee.h"
 #include "headers/heart.h"
 #include "headers/elixir.h"
 #include "headers/strawberry.h"
@@ -66,7 +71,7 @@ private:
 	Arrow arrow;
 	Tongue tongue;
 	Fly fly;
-	Bee bee;
+	Fly bee;
 	Heart hearts[HEARTS_COUNT];
 	Strawberry bonus_strawberry;
 	Elixir bonus_elixir;
