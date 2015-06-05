@@ -29,7 +29,6 @@ void Coin::update(){
 		int position_y = rand() % 250 + 100;
 		rect.top = position_y;
 	}
-
 	sprite.setPosition(rect.left - offset_x, rect.top - offset_y);
 }
 

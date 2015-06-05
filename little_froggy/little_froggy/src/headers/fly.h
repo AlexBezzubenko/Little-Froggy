@@ -24,7 +24,6 @@ protected:
 	bool eaten;
 	float current_frame;
 	float acceleration_x, acceleration_y;
-	Texture texture;
 	Vector2f current_position; 
 	IntRect intrects[6];
 	FloatRect rect;

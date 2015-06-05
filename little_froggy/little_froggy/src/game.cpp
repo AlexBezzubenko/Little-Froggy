@@ -107,10 +107,8 @@ Game::Game()
 
 void Game::run()
 {
-	window.create(VideoMode(SCREEN_SIZE.x, SCREEN_SIZE.y), "Little froggy"
-	//	, Style::Fullscreen
-		);
-	bool fullscreen = false;
+	window.create(VideoMode(SCREEN_SIZE.x, SCREEN_SIZE.y), "Little froggy", Style::Fullscreen);
+	bool fullscreen = true;
 	if (fullscreen){
 		for (int i = 0; i < FLOOR_COUNT; i++){
 			floor_[i].set_rect_top(floor_[i].get_rect().top + floor_[i].get_rect().height);
@@ -165,7 +163,7 @@ void Game::run()
 			time = time / game_speed;
 			processEvents(time);
 				
-			if (!window.isOpen()){ //after prosseEv win.close and cycle is continue that's why use handy break;
+			if (!window.isOpen()){
 				return;
 			}
 			
@@ -232,7 +230,6 @@ void Game::object_update(float time) // =border
 			}
 
 			if (lifes_count == 0){
-				//frog.set_acceleration_y(-0.2);
 				if (music.getStatus() == music.Playing) music.stop();
 				if (game_over_music.getStatus() != game_over_music.Playing) game_over_music.play();
 				GameOver();
@@ -309,7 +306,7 @@ void Game::processEvents(float time)
 			return;
 		}
 	}
-	if (game_mode == 2){
+	if (game_mode == 2 && !game_over){
 		if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)){
 			if (frog.get_acceleration_x() > -0.3 && !frog.is_on_ground()){
 				frog.change_acceleration_x(-0.002);
@@ -328,25 +325,16 @@ void Game::processEvents(float time)
 			}
 		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::S) && !frog.is_on_ground()) {
+	if (Keyboard::isKeyPressed(Keyboard::S) && !frog.is_on_ground() && !game_over) {
 		frog.set_acceleration_y(0.3);
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::R)){
-		offset_y = 0;
-		frog.set_alive(true);
-		frog.set_rect_left(border + 250);
-		frog.set_rect_top(50);
-		frog.set_acceleration_x(0);
-		frog.set_acceleration_y(0);
-		game_over_text.setColor(Color::Transparent);
-	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape)){
 		music.stop();
 		window.close();
 	}
 	
-	if (Mouse::isButtonPressed(Mouse::Right)){
+	if (Mouse::isButtonPressed(Mouse::Right) && !game_over){
 		tongue.set_dot(Mouse::getPosition(window));
 
 		for (int i = 0; i < PLATS_COUNT; i++) {
@@ -362,7 +350,6 @@ void Game::processEvents(float time)
 				&& plats[i].get_type() == 4
 				&& !frog.is_on_tongue()
 				&& distance < SCREEN_SIZE.y / 2 + 150
-				//&& !frog.tongue_out
 				){
 				tongue.set_rect_left(tongue.get_dot().x + offset_x);						// set the tongue's high point
 				tongue.set_rect_top(plats[i].get_rect().top + plats[i].get_rect().height - 5);
@@ -387,11 +374,10 @@ void Game::processEvents(float time)
 				right_angle_border = 360 - angle;
 
 				if (distance_y <= 0 && distance_x < 0) {
-					//angle = 90 - angle; 
 					right_angle_border += 10;
 				}
 				if (distance_y <= 0 && distance_x > 0){
-					angle *= -1; //-(90 - angle); 
+					angle *= -1;
 					left_angle_border -= 10;
 				}
 				if (distance_y < 0){
@@ -405,11 +391,8 @@ void Game::processEvents(float time)
 			
 			if (frog.is_on_tongue()){
 				current_angle = tongue.get_sprite().getRotation();
-				//std::cout << current_angle << std::endl;
-				if (current_angle > left_angle_border && current_angle < 90){ // define III part
+				if (current_angle > left_angle_border && current_angle < 90){ // define is in III part
 					delta_angle *= -1;
-
-					std::cout << "  right = " << right_angle_border << std::endl;
 
 					if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right)){
 						left_angle_border += 20;
@@ -427,8 +410,6 @@ void Game::processEvents(float time)
 				}
 				if (current_angle < right_angle_border && current_angle > 270){ // define IV part
 					delta_angle *= -1;
-
-					std::cout << "left = " << left_angle_border << std::endl;
 
 					if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left)){
 						left_angle_border += 10;
@@ -502,7 +483,7 @@ void Game::processEvents(float time)
 				}
 			}
 		}
-		if (event.mouseButton.button == Mouse::Right){
+		if (event.mouseButton.button == Mouse::Right && !game_over){
 			tongue.set_dot(Mouse::getPosition(window));
 			int k = 0;
 			for (int i = 0; i < PLATS_COUNT; i++) {
@@ -545,11 +526,12 @@ void Game::processEvents(float time)
 								lifes_count++;
 							}
 							hearts[lifes_count - 1].set_full();
+							score += 5;
 						}
 			}
 		}
 	}
-///////////////////////////////////////////////////////////////////////////////
+
 	if (event.type == event.MouseMoved){
 		if (game_mode == 1){
 			frog.set_point_2(Mouse::getPosition(window));
@@ -666,7 +648,8 @@ void Game::processEvents(float time)
 	}
 }
 
-void Game::render(){ // =offset
+void Game::render(){ 
+	// =offset
 	if (frog.get_rect().left > border + SCREEN_SIZE.x / 2){
 		offset_x = frog.get_rect().left - SCREEN_SIZE.x / 2;
 	}
@@ -712,5 +695,5 @@ void Game::GameOver(){
 		game_over_text.setColor(Color::Red);
 		reset_text.setColor(Color::White);
 	}
-		frog.kill();
+	frog.kill();
 }

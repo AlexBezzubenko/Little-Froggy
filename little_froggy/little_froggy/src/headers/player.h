@@ -11,7 +11,6 @@ using namespace sf;
 
 class Player {
 public:
-	
 	void set_acceleration_x(float dx);
 	float get_acceleration_x();
 	void change_acceleration_x(float dx);
@@ -49,7 +48,7 @@ private:
 	bool tongue_out;
 	bool alive;
 
-	Vector2i point_1, point_2;
+	Vector2i point_1, point_2; // two point of mouse position to calculate the power of the jump
 	Vector2i mouth;
 	FloatRect rect;
 	FloatRect mouth_rect;

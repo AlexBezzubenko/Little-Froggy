@@ -38,7 +38,7 @@ int Menu::check_selected(Vector2f point){
 	}
 	return result;
 }
-void Menu::check_target(Vector2f point){
+void Menu::check_target(Vector2f point){ //lightintg of the menu buttons
 	for (int i = 0; i < MENU_STRING_COUNT; i++){
 		if (menu_string[i].getGlobalBounds().contains(point)){
 			menu_string[i].setColor(Color::Red);

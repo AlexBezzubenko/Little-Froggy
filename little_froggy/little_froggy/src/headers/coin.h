@@ -18,7 +18,6 @@ public:
 	void update();
 	void draw(RenderWindow &window);
 private:
-	Texture texture;
 	Sprite sprite;
 	FloatRect rect;
 };

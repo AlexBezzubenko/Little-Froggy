@@ -1,6 +1,19 @@
-﻿Сборка начата 04.06.2015 19:18:42.
+﻿Сборка начата 05.06.2015 23:50:42.
      1>Проект "E:\курсовая\Little-Froggy\little_froggy\little_froggy\little_froggy.vcxproj" в узле 2 (целевые объекты Build).
-     1>Link:
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\SFML-2.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D SFML_DYNAMIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\platform.cpp
+         platform.cpp
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(18): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(71): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(74): warning C4305: =: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(84): warning C4305: =: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(87): warning C4305: =: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(103): warning C4305: =: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(106): warning C4305: =: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(116): warning C4305: =: усечение из "double" к "float"
+     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\platform.cpp(119): warning C4305: =: усечение из "double" к "float"
+     1>cl : командная строка warning D9028: сбой минимальной повторной сборки, возврат к обычной сборке
+       Link:
          C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\курсовая\Little-Froggy\little_froggy\Debug\little_froggy.exe" /INCREMENTAL /NOLOGO /LIBPATH:"E:\SFML-2.2\lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\курсовая\Little-Froggy\little_froggy\Debug\little_froggy.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\курсовая\Little-Froggy\little_froggy\Debug\little_froggy.lib" /MACHINE:X86 Debug\cloud.obj
          Debug\elixir.obj
          Debug\fly.obj
@@ -21,4 +34,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:01.84
+Затраченное время: 00:00:02.62

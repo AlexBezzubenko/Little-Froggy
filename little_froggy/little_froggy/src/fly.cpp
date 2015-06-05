@@ -26,7 +26,7 @@ Fly::Fly(Texture &image, const IntRect intrects[]){
 FloatRect Fly::get_rect(){
 	return rect;
 }
-void Fly::update(float time){
+void Fly::update(float time){ // fly's animation and changing direction
 	if (rect.left + rect.width < border){
 		int pos_x = rect.left + SCREEN_SIZE.x + rand() % 1000;
 		int pos_y = 200 + rand() % 300;
@@ -39,52 +39,52 @@ void Fly::update(float time){
 		acceleration_x = 0.03;
 		acceleration_y = 0.03;
 	}
-		if (rect.left  > current_position.x + 100){
-			sprite.setTextureRect(this->intrects[0]);
-			acceleration_x = -0.03;
+	if (rect.left  > current_position.x + 100){
+		sprite.setTextureRect(this->intrects[0]);
+		acceleration_x = -0.03;
+	}
+	if (rect.left + rect.width < current_position.x - 100){
+		sprite.setTextureRect(this->intrects[3]);
+		acceleration_x = 0.03;
+	}
+	if (acceleration_x < 0){
+		current_frame += 0.005*time;
+		if (current_frame > 3) current_frame -= 3;
+		switch (int(current_frame))
+		{
+		case 0:
+			sprite.setTextureRect(intrects[0]);
+			break;
+		case 1:
+			sprite.setTextureRect(intrects[1]);
+			break;
+		default:
+			sprite.setTextureRect(intrects[2]);
+			break;
 		}
-		if (rect.left + rect.width < current_position.x - 100){
-			sprite.setTextureRect(this->intrects[3]);
-			acceleration_x = 0.03;
-		}
-		if (acceleration_x < 0){
-			current_frame += 0.005*time;
-			if (current_frame > 3) current_frame -= 3;
-			switch (int(current_frame))
-			{
-			case 0:
-				sprite.setTextureRect(intrects[0]);
-				break;
+	}
+	if (acceleration_x > 0){
+		current_frame += 0.005*time;
+		if (current_frame > 3) current_frame -= 3;
+		switch (int(current_frame))
+		{
+		case 0:
+			sprite.setTextureRect(intrects[3]);
+			break;
 			case 1:
-				sprite.setTextureRect(intrects[1]);
-				break;
-			default:
-				sprite.setTextureRect(intrects[2]);
-				break;
-			}
+			sprite.setTextureRect(intrects[4]);
+			break;
+		default:
+			sprite.setTextureRect(intrects[5]);
+			break;
 		}
-		if (acceleration_x > 0){
-			current_frame += 0.005*time;
-			if (current_frame > 3) current_frame -= 3;
-			switch (int(current_frame))
-			{
-			case 0:
-				sprite.setTextureRect(intrects[3]);
-				break;
-			case 1:
-				sprite.setTextureRect(intrects[4]);
-				break;
-			default:
-				sprite.setTextureRect(intrects[5]);
-				break;
-			}
-		}
-		if (rect.top  < current_position.y - 50){
-			acceleration_y = 0.03;
-		}
-		if (rect.top + rect.height > current_position.y + 50){
-			acceleration_y = -0.03;
-		}
+	}
+	if (rect.top  < current_position.y - 50){
+		acceleration_y = 0.03;
+	}
+	if (rect.top + rect.height > current_position.y + 50){
+		acceleration_y = -0.03;
+	}
 
 	rect.top += acceleration_y*time;
 	rect.left += acceleration_x*time;
@@ -105,10 +105,10 @@ bool Fly::check_is_inrect(Vector2i dot){
 }
 
 void Fly::set_current_position(float curr_pos_x, float curr_pos_y){
-	this->current_position.x = curr_pos_x;
-	this->current_position.y = curr_pos_y;
-	this->rect.left = curr_pos_x;
-	this->rect.top = curr_pos_y;
+	current_position.x = curr_pos_x;
+	current_position.y = curr_pos_y;
+	rect.left = curr_pos_x;
+	rect.top = curr_pos_y;
 	acceleration_x = 0.03;
 	eaten = false;
 }

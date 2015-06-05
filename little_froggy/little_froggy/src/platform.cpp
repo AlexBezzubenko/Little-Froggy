@@ -47,8 +47,7 @@ void Platform::set_rect_left(float left){
 }
 void Platform::update(float time){
 
-	if (rect.left + rect.width < border){
-		
+	if (rect.left + rect.width < border){	
 		for (int i = 0; i < 4; i++){
 			if (plats[i].rect == rect){
 				
@@ -61,9 +60,9 @@ void Platform::update(float time){
 					type = rand() % 5;
 				}
 				rect.left = plats[previous].rect.left + 3 * rect.width;
-				if (rect.left + rect.width < border + SCREEN_SIZE.x){
+				/*if (rect.left + rect.width < border + SCREEN_SIZE.x){
 					rect.left = border + SCREEN_SIZE.x;
-				}
+				}*/
 				crashed = false;
 				timer = 0;
 				frog_on = false;
