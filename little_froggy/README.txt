@@ -13,6 +13,7 @@ A Visual Studio 2013 project is provided in main folder
 First of all you should install SFML.
 Then run the MS Visual Studio solution and write path to the folder with SFML-libs
 in the project properties. 
+http://kychka-pc.ru/sfml/urok-1-podklyuchenie-biblioteki-k-srede-razrabotki-visual-studio-2013.html
 
 Compiling on Linux:
 -------------------
