@@ -141,7 +141,7 @@ void Player::update(float time) {
 		if (onground && rect.left + rect.width > plats[i].get_rect().left
 			&& rect.left < plats[i].get_rect().left + plats[i].get_rect().width){
 			plats[i].set_frog_on(true);
-			if (plats[i].get_type() == 2 && !on_tongue){
+			if (plats[i].get_type() == 2 && !on_tongue && plats[i].get_rect().top < rect.top + rect.width - 3){
 				set_acceleration_x(plats[i].get_acceleration_x());
 			}
 		}
@@ -179,7 +179,7 @@ void Player::Collision(int dir) {
 				set_acceleration_y(0);
 				set_acceleration_x(0);
 				onground = false;
-			}			
+			}
 		}
 	}
 }

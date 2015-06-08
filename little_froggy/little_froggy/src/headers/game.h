@@ -55,6 +55,8 @@ private:
 	bool game_is_running;
 	bool game_over;
 
+	int score;
+	int highscore;
 	int lifes_count;
 	int game_mode;
 	int game_speed = 400;
@@ -95,6 +97,8 @@ private:
 	Text game_over_text;
 	Text reset_text;
 	Text score_text;
+	Text highscore_text;
+	Text new_highscore_text;
 	Font font;
 };
 

@@ -11,7 +11,6 @@
 extern float offset_x ; //offsets for view scrolling
 extern float offset_y ; 
 extern float border; // left border of the screen
-extern int score;
 
 const int PLATS_COUNT = 4;
 const int FLOOR_COUNT = 8;

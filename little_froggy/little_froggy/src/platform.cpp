@@ -68,7 +68,7 @@ void Platform::update(float time){
 				frog_on = false;
 			}
 		}
-		rect.top = SCREEN_SIZE.y / 2;
+		rect.top = SCREEN_SIZE.y / 2 - 50 + rand() % 100;
 		
 		acceleration_x = acceleration_y = 0;
 		if (type == 2) acceleration_x = -0.03;

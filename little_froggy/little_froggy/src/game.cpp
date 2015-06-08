@@ -7,11 +7,11 @@
 #include "headers/game.h"
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 float offset_x = 0;
 float offset_y = 0;
 float border = 0;
-int score = 0;
 
 Platform plats[PLATS_COUNT];
 
@@ -99,10 +99,25 @@ Game::Game()
 	score_text.setPosition(SCREEN_SIZE.x - 300, 0);
 	score_text.setCharacterSize(50);
 	score_text.setColor(Color::Red);
+
+	highscore_text.setFont(font);
+	highscore_text.setPosition(SCREEN_SIZE.x - 350, 60);
+	highscore_text.setCharacterSize(50);
+	highscore_text.setColor(Color::White);
+
+	new_highscore_text.setFont(font);
+	new_highscore_text.setString("NEW HIGHSCORE");
+	new_highscore_text.setCharacterSize(72);
+	new_highscore_text.setPosition(SCREEN_SIZE.x / 2 - new_highscore_text.getLocalBounds().width / 2, 0);
+	new_highscore_text.setColor(Color::Transparent);
 	
 	menu_texture = new Texture();
 	menu_texture->loadFromFile("res/images/background_menu.jpg");
 	menu = { *menu_texture, font };
+
+	std::ifstream fin("score.txt"); 
+	fin >> highscore;
+	fin.close();
 }
 
 void Game::run()
@@ -212,6 +227,7 @@ void Game::object_update(float time) // =border
 	}
 	
 	if (frog.get_rect().intersects(bonus_strawberry.get_rect())){
+		score += 3;
 		lifes_count += 3;
 		if (lifes_count > 3){
 			lifes_count = 3;
@@ -245,7 +261,7 @@ void Game::object_update(float time) // =border
 			hearts[lifes_count - 1].set_empty();
 			lifes_count--;
 		}
-		if (!frog.is_on_tongue()){
+		if (!frog.is_on_tongue() && !frog.is_on_ground()){
 			if (frog.get_rect().left < bee.get_rect().left){
 				frog.set_acceleration_x(-0.2);
 			}
@@ -261,6 +277,7 @@ void Game::object_update(float time) // =border
 				frog.set_acceleration_y(0.2);
 			}
 		}
+		bee.stop();
 		if (lifes_count == 0){
 			if (music.getStatus() == music.Playing) music.stop();
 			if (game_over_music.getStatus() != game_over_music.Playing) game_over_music.play();
@@ -293,6 +310,9 @@ void Game::object_update(float time) // =border
 	std::stringstream score_str;    
 	score_str << score;
 	score_text.setString("Score: " + score_str.str());
+	std::stringstream highscore_str;
+	highscore_str << highscore;
+	highscore_text.setString("Highscore: " + highscore_str.str());
 }
 
 void Game::processEvents(float time)
@@ -336,7 +356,7 @@ void Game::processEvents(float time)
 	
 	if (Mouse::isButtonPressed(Mouse::Right) && !game_over){
 		tongue.set_dot(Mouse::getPosition(window));
-
+		
 		for (int i = 0; i < PLATS_COUNT; i++) {
 			double distance_x, distance_y;
 		
@@ -474,10 +494,12 @@ void Game::processEvents(float time)
 
 					game_over = false; 
 					frog.respawn();
+					bee.set_current_position(border + SCREEN_SIZE.x, 300);
 					lifes_count++;
 					hearts[0].set_full();
 					reset_text.setColor(Color::Transparent);
 					game_over_text.setColor(Color::Transparent);
+					new_highscore_text.setColor(Color::Transparent);
 					game_over_music.stop();
 					music.play();
 				}
@@ -485,6 +507,7 @@ void Game::processEvents(float time)
 		}
 		if (event.mouseButton.button == Mouse::Right && !game_over){
 			tongue.set_dot(Mouse::getPosition(window));
+			
 			int k = 0;
 			for (int i = 0; i < PLATS_COUNT; i++) {
 				if (!(plats[i].get_rect().left - offset_x < tongue.get_dot().x
@@ -510,6 +533,16 @@ void Game::processEvents(float time)
 					if (distance > SCREEN_SIZE.y / 2){
 						distance = SCREEN_SIZE.y / 2;
 					}
+					else {
+						if (fly.check_is_inrect(tongue.get_dot())){
+							fly.stop();
+							if (lifes_count < 3){
+								lifes_count++;
+							}
+							hearts[lifes_count - 1].set_full();
+							score += 5;
+						}
+					}
 					tongue.set_sprite_scale(1.f, distance / tongue.get_original_height());
 					tongue.set_rect_height(tongue.get_original_height() * tongue.get_sprite().getScale().y);
 
@@ -519,15 +552,6 @@ void Game::processEvents(float time)
 
 						frog.set_on_tongue(false);
 						frog.set_tongue_out(true);
-					
-						if (fly.check_is_inrect(tongue.get_dot())){
-							fly.stop();
-							if (lifes_count < 3){
-								lifes_count++;
-							}
-							hearts[lifes_count - 1].set_full();
-							score += 5;
-						}
 			}
 		}
 	}
@@ -663,28 +687,31 @@ void Game::render(){
 	for (int i = 0; i < CLOUDS_COUNT; i++){
 		clouds[i].draw(window);
 	}
-	arrow.draw(window);
-	frog.draw(window);
-	tongue.draw(window);
-	fly.draw(window);
-	bee.draw(window);
-	bonus_strawberry.draw(window);
-	bonus_elixir.draw(window);
-
 	for (int i = 0; i < PLATS_COUNT; i++){
 		plats[i].draw(window);
 	}
+	arrow.draw(window);
+	frog.draw(window);
+	tongue.draw(window);
+	bonus_strawberry.draw(window);
+	bonus_elixir.draw(window);
+	for (int i = 0; i < COIN_COUNT; i++){
+		coin[i].draw(window);
+	}
+	fly.draw(window);
+	bee.draw(window);
+	
 	for (int i = 0; i < FLOOR_COUNT; i++){
 		floor_[i].draw(window);
 	}
 	for (int i = 0; i < HEARTS_COUNT; i++){
 		hearts[i].draw(window);
 	}
-	for (int i = 0; i < COIN_COUNT; i++){
-		coin[i].draw(window);
-	}
+	
 	window.draw(score_text);
+	window.draw(highscore_text);
 	window.draw(game_over_text);
+	window.draw(new_highscore_text);
 	window.draw(reset_text);
 	window.display();
 }
@@ -696,4 +723,14 @@ void Game::GameOver(){
 		reset_text.setColor(Color::White);
 	}
 	frog.kill();
+	
+	if (highscore < score){
+		new_highscore_text.setColor(Color::Blue);
+		highscore = score;
+		std::ofstream fout;
+		fout.open("score.txt");
+		fout << highscore;
+		fout.close();
+	}
+
 }
