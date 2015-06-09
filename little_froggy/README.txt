@@ -21,6 +21,8 @@ You must have installed libsfml-dev in a standard path
 
 sudo apt-get install libsfml-dev
 
+You should change path to headers, example #include "headers/game.h" -> #include "game.h"
+
 Go to project directory and execute Makefile
 
 LICENSE
