@@ -1,39 +1,7 @@
-﻿Сборка начата 08.06.2015 23:49:19.
+﻿Сборка начата 13.06.2015 0:03:16.
      1>Проект "E:\курсовая\Little-Froggy\little_froggy\little_froggy\little_froggy.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
-         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\SFML-2.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _CONSOLE /D _LIB /D SFML_DYNAMIC /D _MBCS /Gm- /EHsc /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\cloud.cpp src\elixir.cpp src\fly.cpp src\heart.cpp src\main.cpp src\arrow.cpp src\coin.cpp src\floor.cpp src\game.cpp src\menu.cpp src\platform.cpp src\player.cpp src\sun.cpp src\tongue.cpp src\strawberry.cpp
-         cloud.cpp
-     1>src\cloud.cpp(29): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-         elixir.cpp
-     1>src\elixir.cpp(23): warning C4244: =: преобразование "int" в "float", возможна потеря данных
-         fly.cpp
-     1>src\fly.cpp(22): warning C4305: =: усечение из "double" к "float"
-     1>src\fly.cpp(31): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-     1>src\fly.cpp(33): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-     1>src\fly.cpp(39): warning C4305: =: усечение из "double" к "float"
-     1>src\fly.cpp(40): warning C4305: =: усечение из "double" к "float"
-     1>src\fly.cpp(44): warning C4305: =: усечение из "double" к "float"
-     1>src\fly.cpp(48): warning C4305: =: усечение из "double" к "float"
-     1>src\fly.cpp(51): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-     1>src\fly.cpp(67): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-     1>src\fly.cpp(83): warning C4305: =: усечение из "double" к "float"
-     1>src\fly.cpp(86): warning C4305: =: усечение из "double" к "float"
-     1>src\fly.cpp(96): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
-     1>src\fly.cpp(97): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
-     1>src\fly.cpp(112): warning C4305: =: усечение из "double" к "float"
-         heart.cpp
-         main.cpp
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(21): warning C4305: инициализация: усечение из "double" к "float"
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(22): warning C4305: инициализация: усечение из "double" к "float"
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(23): warning C4305: инициализация: усечение из "double" к "float"
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(24): warning C4305: инициализация: усечение из "double" к "float"
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/game.h(64): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/game.h(65): warning C4305: инициализация: усечение из "double" к "float"
-         arrow.cpp
-         coin.cpp
-     1>src\coin.cpp(30): warning C4244: =: преобразование "int" в "float", возможна потеря данных
-         floor.cpp
-     1>src\floor.cpp(14): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\SFML-2.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _CONSOLE /D _LIB /D SFML_DYNAMIC /D _MBCS /Gm- /EHsc /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\game.cpp
          game.cpp
      1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(21): warning C4305: инициализация: усечение из "double" к "float"
      1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(22): warning C4305: инициализация: усечение из "double" к "float"
@@ -78,39 +46,6 @@
      1>src\game.cpp(625): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
      1>src\game.cpp(644): warning C4305: инициализация: усечение из "double" к "float"
      1>src\game.cpp(670): warning C4305: =: усечение из "double" к "float"
-         menu.cpp
-     1>src\menu.cpp(15): warning C4244: аргумент: преобразование "const int" в "float", возможна потеря данных
-     1>src\menu.cpp(27): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-         platform.cpp
-     1>src\platform.cpp(18): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-     1>src\platform.cpp(71): warning C4244: =: преобразование "int" в "float", возможна потеря данных
-     1>src\platform.cpp(74): warning C4305: =: усечение из "double" к "float"
-     1>src\platform.cpp(84): warning C4305: =: усечение из "double" к "float"
-     1>src\platform.cpp(87): warning C4305: =: усечение из "double" к "float"
-     1>src\platform.cpp(103): warning C4305: =: усечение из "double" к "float"
-     1>src\platform.cpp(106): warning C4305: =: усечение из "double" к "float"
-     1>src\platform.cpp(116): warning C4305: =: усечение из "double" к "float"
-     1>src\platform.cpp(119): warning C4305: =: усечение из "double" к "float"
-         player.cpp
-     1>src\player.cpp(17): warning C4305: аргумент: усечение из "double" к "float"
-     1>src\player.cpp(110): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-     1>src\player.cpp(121): warning C4305: аргумент: усечение из "double" к "float"
-     1>src\player.cpp(126): warning C4305: аргумент: усечение из "double" к "float"
-     1>src\player.cpp(138): warning C4305: аргумент: усечение из "double" к "float"
-     1>src\player.cpp(153): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-     1>src\player.cpp(154): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-         sun.cpp
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(21): warning C4305: инициализация: усечение из "double" к "float"
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(22): warning C4305: инициализация: усечение из "double" к "float"
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(23): warning C4305: инициализация: усечение из "double" к "float"
-     1>e:\курсовая\little-froggy\little_froggy\little_froggy\src\headers/sun.h(24): warning C4305: инициализация: усечение из "double" к "float"
-     1>src\sun.cpp(14): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-     1>src\sun.cpp(23): warning C4244: =: преобразование "int" в "float", возможна потеря данных
-     1>src\sun.cpp(24): warning C4305: =: усечение из "double" к "float"
-     1>src\sun.cpp(29): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
-         tongue.cpp
-         strawberry.cpp
-     1>src\strawberry.cpp(23): warning C4244: =: преобразование "int" в "float", возможна потеря данных
        Link:
          C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\курсовая\Little-Froggy\little_froggy\Release\little_froggy.exe" /NOLOGO /LIBPATH:"E:\SFML-2.2\lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" Shell32.lib winstrm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\курсовая\Little-Froggy\little_froggy\Release\little_froggy.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\курсовая\Little-Froggy\little_froggy\Release\little_froggy.lib" /MACHINE:X86 /SAFESEH Release\cloud.obj
          Release\elixir.obj
@@ -134,4 +69,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:28.95
+Затраченное время: 00:00:10.46

@@ -122,13 +122,13 @@ Game::Game()
 
 void Game::run()
 {
-	window.create(VideoMode(SCREEN_SIZE.x, SCREEN_SIZE.y), "Little froggy", Style::Fullscreen);
-	bool fullscreen = true;
-	if (fullscreen){
+	window.create(VideoMode(SCREEN_SIZE.x, SCREEN_SIZE.y), "Little froggy"/*, Style::Fullscreen*/);
+	/*bool fullscreen = true;
+	if (fullscreen){*/
 		for (int i = 0; i < FLOOR_COUNT; i++){
 			floor_[i].set_rect_top(floor_[i].get_rect().top + floor_[i].get_rect().height);
 		}
-	}
+	//}
 	window.setFramerateLimit(240);
 	while (window.isOpen())
 	{
@@ -326,7 +326,7 @@ void Game::processEvents(float time)
 			return;
 		}
 	}
-	if (game_mode == 2 && !game_over){
+	if (game_mode == 2 && !game_over && !frog.is_on_tongue()){
 		if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)){
 			if (frog.get_acceleration_x() > -0.3 && !frog.is_on_ground()){
 				frog.change_acceleration_x(-0.002);
